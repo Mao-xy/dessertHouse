@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+    
+    <struts>
+   		<package name="memberJson" namespace="/api" extends="json-default">
+   			<action name="modify_username" class="memberJsonController" method="modifyUsername">
+   				<result type="json"/>
+   			</action>
+   			<action name="modify_password" class="memberJsonController" method="modifyPassword">
+   				<result type="json" />
+   			</action>
+   			<action name="modify_birthday" class="memberJsonController" method="modifyBirthday">
+   				<result type="json" />
+   			</action>
+   			<action name="modify_phone" class="memberJsonController" method="modifyPhone">
+   				<result type="json" />
+   			</action>
+   			<action name="modify_card" class="memberJsonController" method="modifyCard">
+   				<result type="json" />
+   			</action>
+   			<action name="modify_address" class="memberJsonController" method="modifyAddress">
+   				<result type="json" />
+   			</action>
+   			<action name="exchange_points" class="memberJsonController" method="exchangePoints">
+   				<result type="json" />
+   			</action>
+   			<action name="recharge" class="memberJsonController" method="recharge">
+   				<result type="json" />
+   			</action>
+   		</package>
+   		<package name="reserve" namespace="/reserve" extends="json-default">
+   			<action name="saleable" class="planJsonController" method="saleableOfShop">
+   				<result type="json">
+   					<param name="root">commodOfPlan</param> 
+   				</result>
+   			</action>
+   			<action name="addReserve" class="salesJsonController" method="addReserve">
+   				<result type="json" />
+   			</action>
+   		</package>
+   		<package name="mainserver" namespace="/mainserver" extends="json-default">
+   			<action name="plan" class="mainServerJsonController">
+   				<result type="json">
+   					<param name="root">planList</param> 
+   				</result>
+   			</action>
+   			<action name="commodOfPlan" class="planJsonController" method="commodOfPlan">
+   				<result type="json">
+   					<param name="root">commodOfPlan</param> 
+   				</result>
+   			</action>
+   			<action name="deletePlan" class="planJsonController" method="deletePlan">
+   				<result type="json" />
+   			</action>
+   		</package>
+    </struts>

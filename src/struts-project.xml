@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<package name="test" extends="struts-default">
+		<action name="test" class="testController">
+			<result name="success">/index.jsp</result>
+		</action>
+	</package>
+	<package name="login" namespace="/login" extends="struts-default">
+		<action name="member" class="memberController">
+			<result name="success">/memberHome.jsp</result>
+			<result name="error">/login-error.jsp</result>
+		</action>
+		<action name="staff" class="staffController">
+			<result name="0">/adminHome.jsp</result>
+			<result name="3">/managerHome.jsp</result>
+			<result name="2">/mainServerHome.jsp</result>
+			<result name="1">/salesHome.jsp</result>
+			<result name="error">/login-error.jsp</result>
+		</action>
+	</package>
+	<package name="redirect" namespace="/direct" extends="struts-default">
+		<action name="admin" class="staffController" method="admin">
+			<result name="staff">/staff_management.jsp</result>
+			<result name="shop">/adminHome.jsp</result>
+		</action>
+		<action name="manager" class="staffController" method="manager">
+			<result name="check">/managerHome.jsp</result>
+			<result name="stats">/stats.jsp</result>
+		</action>
+		<action name="member" class="memberController" method="redirect">
+			<result name="reserve">/reserve.jsp</result>
+			<result name="home">/memberHome.jsp</result>
+		</action>
+	</package>
+	<package name="logout" namespace="/logout" extends="struts-default">
+		<action name="member" class="memberController" method="logout">
+			<result name="success">/login.jsp</result>
+		</action>
+		<action name="staff" class="staffController" method="logout">
+			<result name="success">/login.jsp</result>
+		</action>
+	</package>
+	<package name="member" namespace="/member" extends="struts-default">
+		<action name="register" class="memberController" method="register">
+			<result name="success">/memberHome.jsp</result>
+			<result name="error">/login-error.jsp</result>
+		</action>
+	</package>
+</struts>

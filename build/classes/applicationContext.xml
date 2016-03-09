@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+	   					   http://www.springframework.org/schema/beans/spring-beans.xsd
+	   					   http://www.springframework.org/schema/tx
+	   					   http://www.springframework.org/schema/tx/spring-tx.xsd
+	   					   http://www.springframework.org/schema/context
+	   					   http://www.springframework.org/schema/context/spring-context.xsd
+	   					   http://www.springframework.org/schema/aop
+	   					   http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<context:component-scan base-package="desserthouse" />
+
+	<import resource="spring-hibernate.xml" />
+	
+	<!-- controller -->
+	
+	<!-- html controller -->
+	<bean id="memberController" class="desserthouse.controller.html.MemberController" scope="prototype" />
+	<bean id="staffController" class="desserthouse.controller.html.StaffController" scope="prototype" />
+	
+	<bean id="testController" class="desserthouse.controller.html.TestController" scope="prototype" />
+	
+	<!-- json controller -->
+	<bean id="memberJsonController" class="desserthouse.controller.api.MemberJsonController" />
+	<bean id="planJsonController" class="desserthouse.controller.api.PlanJsonController" />
+	<bean id="salesJsonController" class="desserthouse.controller.api.SalesJsonController" />
+	<bean id="mainServerJsonController" class="desserthouse.controller.api.MainServerJsonController" />
+	
+	<!-- service -->
+	<bean id="memberService" class="desserthouse.service.impl.MemberServiceImpl"/>
+	<bean id="staffService" class="desserthouse.service.impl.StaffServiceImpl"/>
+	<bean id="commodityService" class="desserthouse.service.impl.CommodityServiceImpl"/>
+	<bean id="recordService" class="desserthouse.service.impl.RecordServiceImpl"/>
+	<bean id="shopService" class="desserthouse.service.impl.ShopServiceImpl"/>
+	<bean id="planService" class="desserthouse.service.impl.PlanServiceImpl"/>
+	<bean id="salesService" class="desserthouse.service.impl.SalesServiceImpl"/>
+	
+	<!-- dao -->
+	<bean id="baseDao" class="desserthouse.dao.impl.BaseDaoImpl" />
+	<bean id="memberDao" class="desserthouse.dao.impl.MemberDaoImpl" />
+	<bean id="staffDao" class="desserthouse.dao.impl.StaffDaoImpl" />
+	<bean id="commodityDao" class="desserthouse.dao.impl.CommodityDaoImpl" />
+	<bean id="recordDao" class="desserthouse.dao.impl.RecordDaoImpl" />
+	<bean id="shopDao" class="desserthouse.dao.impl.ShopDaoImpl" />
+	<bean id="planDao" class="desserthouse.dao.impl.PlanDaoImpl" />
+	<bean id="salesDao" class="desserthouse.dao.impl.SalesDaoImpl" />
+	
+</beans>

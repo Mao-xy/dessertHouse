@@ -44,7 +44,16 @@ public class StaffController extends BaseController {
 	}
 	
 	public String manager(){
-		String type = getParams().get("type");
+		String type = getParams().get("type").trim();
+		long id = (long)session().getAttribute("id");
+		StaffVO vo = ss.getStaffById(id);
+		session().setAttribute("staff_id", id);
+		session().setAttribute("staff_name", vo.getName());
+		return type;
+	}
+	
+	public String mainServer(){
+		String type = getParams().get("type").trim();
 		long id = (long)session().getAttribute("id");
 		StaffVO vo = ss.getStaffById(id);
 		session().setAttribute("staff_id", id);

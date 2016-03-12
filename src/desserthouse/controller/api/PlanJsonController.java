@@ -30,23 +30,55 @@ public class PlanJsonController extends BaseController {
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	public String allPlan(){
-		planList=ps.getAllPlan();
+		System.out.println("PlanJsonController:default getAllPlan");
+		planList = ps.getAllPlan();
+		for(PlanVO vo:planList){
+			if(vo.getStatus()==Configure.PLAN_AGREE){
+				vo.setStatusInString("已通过");
+			}
+			else if(vo.getStatus()==Configure.PLAN_DISAGREE){
+				vo.setStatusInString("待修改");
+			}
+			else if(vo.getStatus()==Configure.PLAN_APPLY){
+				vo.setStatusInString("未审批");
+			}
+		}
 		return Configure.SUCCESS;
 	}
 	
 	public String planByStaff(){
 		long id = Long.parseLong(getParams().get("staff_id"));
 		planList=ps.getPlanByStaff(id);
+		for(PlanVO vo:planList){
+			if(vo.getStatus()==Configure.PLAN_AGREE){
+				vo.setStatusInString("已通过");
+			}
+			else if(vo.getStatus()==Configure.PLAN_DISAGREE){
+				vo.setStatusInString("待修改");
+			}
+			else if(vo.getStatus()==Configure.PLAN_APPLY){
+				vo.setStatusInString("未审批");
+			}
+		}
 		return Configure.SUCCESS;
 	}
 	
 	public String planByStatus(){
-		int status = Integer.parseInt(getParams().get("status"));
+		System.out.println("planJsonController:planByStatus");
+		System.out.println(getParams().toString());
+		int status = Integer.parseInt(getParams().get("status").trim());
 		planList=ps.getPlanByStatus(status);
+		for(PlanVO vo:planList){
+			if(vo.getStatus()==Configure.PLAN_AGREE){
+				vo.setStatusInString("已通过");
+			}
+			else if(vo.getStatus()==Configure.PLAN_DISAGREE){
+				vo.setStatusInString("待修改");
+			}
+			else if(vo.getStatus()==Configure.PLAN_APPLY){
+				vo.setStatusInString("未审批");
+			}
+		}
 		return Configure.SUCCESS;
 	}
 	
@@ -93,8 +125,8 @@ public class PlanJsonController extends BaseController {
 	public String deletePlan(){
 		System.out.println("planJsonController:deletePlan");
 		System.out.println(getParams().toString());
-		String spanid = getParams().get("id").trim();
-		String[] temp = spanid.split("\\+");
+		String planid = getParams().get("id").trim();
+		String[] temp = planid.split("\\+");
 		for(String id:temp){
 			if(!id.equals("")){
 				System.out.println(id);
@@ -126,6 +158,49 @@ public class PlanJsonController extends BaseController {
 			commod.setCommod_name(vo.getName());
 			commod.setReserve_number(0);
 			commod.setNumber("<a class='plus' href='javascript:void(0);' onclick='plusClick(this);'><span class='glyphicon glyphicon-plus'></span></a>    <span class='number'>0</span>    <a class='minus' href='javascript:void(0);' onclick='minusClick(this);'><span class='glyphicon glyphicon-minus'></span></a>");
+		}
+		return Configure.SUCCESS;
+	}
+	
+	public String checkPlan(){
+		System.out.println("PlanJsonController:checkPlan");
+		String type = getParams().get("type");
+		String planid = getParams().get("id").trim();
+		ArrayList<Long> idList = new ArrayList<Long>();
+		String[] temp = planid.split("\\+");
+		for(String id:temp){
+			if(!id.equals("")){
+				System.out.println(id);
+				idList.add(Long.parseLong(id));
+			}
+		}
+		if(type.equals(Configure.AGREE)){
+			System.out.println("agree");
+			ps.agreePlan(idList);
+		}else{
+			System.out.println("disagree");
+			ps.disagreePlan(idList);
+		}
+		return Configure.SUCCESS;
+	}
+	
+	public String removeCommod(){
+		long id = Long.parseLong(getParams().get("id").trim());
+		ps.removeCommod(id);
+		return Configure.SUCCESS;
+	}
+	
+	public String modifyCommod(){
+		Map<String,String> params = getParams();
+		System.out.println("PlanJsonController:modifyCommod "+params.toString());
+		long id = Long.parseLong(params.get("id").trim());
+		String field = params.get("field").trim();
+		if(field.equals("amount")){
+			int amount = Integer.parseInt(params.get("value").trim());
+			ps.modifyAmount(id, amount);
+		}else if(field.equals("price")){
+			double price = Double.parseDouble(params.get("value").trim());
+			ps.modifyPrice(id, price);
 		}
 		return Configure.SUCCESS;
 	}

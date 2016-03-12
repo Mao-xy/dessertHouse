@@ -49,8 +49,8 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="#"><span class="glyphicon glyphicon-list-alt"></span> 产品计划</a></li>
-			<li><a href="<%=request.getContextPath() %>/direct/mainServer?type=makePlan"><span class="glyphicon glyphicon-pencil"></span> 计划制定</a></li>
+			<li><a href="<%=request.getContextPath() %>/direct/mainServer?type=home"><span class="glyphicon glyphicon-list-alt"></span> 产品计划</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-pencil"></span> 计划制定</a></li>
 			<li><a href="#"><span class="glyphicon glyphicon-envelope"></span> 消息</a></li>
 		</ul>
 		<div class="attribution">Made By <a href="#">Mao Xueying</a></div>
@@ -69,39 +69,50 @@
 				<h1 class="page-header"><%=session.getAttribute("staff_name") %>，你好</h1>
 			</div>
 		</div><!--/.row-->
-				
-		<div class="row">
-			<div class="col-lg-12">
-				<h2>通知</h2>
-				<div class="alert bg-success alert-dismissable" role="alert" id="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-				      &times;
-				   </button>
-					<span class="glyphicon glyphicon-check"></span> 您制定的编号为003的产品计划已被批准。</span>  
-				</div>
-				<!-- 
-				<div class="alert bg-warning" role="alert">
-					<span class="glyphicon glyphicon-warning-sign"></span> 您制定的编号为005的产品计划未被批准，请及时修改。 <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-				</div>
-				<div class="alert bg-danger" role="alert">
-					<span class="glyphicon glyphicon-exclamation-sign"></span> 请尽快制定下周的产品计划。 <a href="#" class="pull-right"><span class="glyphicon glyphicon-remove"></span></a>
-				</div>
-				-->
-			</div>
-		</div><!--/.row-->
 		
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="panel panel-default">
 					<div class="panel-heading">产品计划</div>
 					<div class="panel-body">
-						<div id="toolbar" class="btn-group">
-				            <button id="btn_delete" type="button" class="btn btn-default">
-				                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
-				            </button>
-				        </div>
+				        <div class="row">
+							<div class="form-group form-inline col-lg-4">
+								<label>选择日期</label>
+								<select class="form-control" id="date-select">
+								
+								</select>
+							</div>
+						</div>
 						<table id="plan-table">
 						</table>
+						<div class="row">
+							<form class="form-inline" role="form">
+								<div class="row">
+									<div class="form-group col-lg-offset-1 col-lg-3">
+									    <label class="col-sm-5 control-label" for="total">总额</label>
+									    <div class="col-sm-7">
+									    	<input type="hidden" id=""/>
+									    	<p class="form-control-static static"><span id="total">0.0</span>元</p>
+									    </div>
+									</div>
+									<div class="form-group col-lg-3">
+									    <label class="col-sm-5 control-label" for="reserve-date">预定日期</label>
+									    <div class="col-sm-7 ">
+									      <p class="form-control-static static" id="reserve-date"></p>
+									    </div>
+									</div>
+									<div class="form-group col-lg-3">
+									    <label class="col-sm-5 control-label" for="reserve-shop">预定店面</label>
+									    <div class="col-sm-7">
+									      <p class="form-control-static static" id="reserve-shop">总店</p>
+									    </div>
+									</div>
+									<div class="form-group col-lg-2">
+									    <button type="button" class="btn btn-primary" id="confirm">确认预定</button>
+									 </div>
+							  	</div>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -137,7 +148,7 @@
 		 var oTable = new TableInit();
 		 oTable.Init();
 		 oTable.InitSubTable();
-		 
+	 
 	});
 	 
 	 
@@ -146,7 +157,7 @@
 		 //初始化Table
 		 oTableInit.Init = function () {
 		  $('#plan-table').bootstrapTable({
-		   url: '<%=request.getContextPath() %>/mainserver/plan',   //请求后台的URL（*）
+		   url: '<%=request.getContextPath() %>/mainserver/allCommod',   //请求后台的URL（*）
 		   method: 'post',      //请求方式（*）
 		   toolbar: '#toolbar',    //工具按钮用哪个容器
 		   striped: true,      //是否显示行间隔色
@@ -168,30 +179,30 @@
 		   uniqueId: "plan_id",      //每一行的唯一标识，一般为主键列
 		   showToggle:true,     //是否显示详细视图和列表视图的切换按钮
 		   cardView: false,     //是否显示详细视图
-		   detailView: true,     //是否显示父子表
+		   detailView: false,     //是否显示父子表
 		   columns: [{
 			 checkbox: true 
 		   },{
-		    field: 'plan_id',
+		    field: 'commod_id',
 		    title: '计划编号',
 		    align:	'center',
 		    class: 'plan_id'
 		   }, {
-		    field: 'start_date',
+		    field: 'name',
 		    title: '生效日期',
 		    align:	'center',
 		    class: 'start_date',
 		    sortable: true,      //是否启用排序
 		    sortOrder: "desc"     //排序方式
 		   }, {
-		    field: 'end_date',
+		    field: 'amount',
 		    title: '结束日期',
 		    align:	'center',
 		    class: 'end_date',
 		    sortable: true,      //是否启用排序
 		    sortOrder: "desc"     //排序方式
 		   }, {
-		    field: 'staff_id',
+		    field: 'price',
 		    title: '制定人',
 		    align:	'center',
 		    class: 'staff_id'
@@ -208,141 +219,11 @@
 		    align:	'center',
 		    class: 'status'
 		   }
-		  ],
-		   onExpandRow: function (index, row, $detail) {
-			   oTableInit.InitSubTable(index, row, $detail);
-		   }
+		  ]
 		  });
 		 };
-		 
-		//初始化子表格
-		oTableInit.InitSubTable = function (index, row, $detail) {
-		  var parentid = row.plan_id;
-		  cur_table = $detail.html('<table></table>').find('table');
-		  $(cur_table).bootstrapTable({
-		    url: '<%=request.getContextPath() %>/mainserver/commodOfPlan',
-		    method: 'get',
-		    queryParams: { plan_id: parentid },
-		    detailView: false,
-		    editable: true,
-		    onEditableSave: function (field, row, oldValue, $el) {
-	        	var url = "http://localhost:8080/dessertHouse/mainserver/modifyCommod";
-	        	var id = row.planlist_id;
-	        	var value = '';
-	        	if($.trim(field)=='price'){
-	        		value = row.price;
-	        	}else if($.trim(field)=='amount'){
-	        		value = row.amount;
-	        	}
-	        	$.ajax({
-	    			url: url,	 	
-	    			type:'get', 	
-	    			dataType:'json', 													
-	    			data:{
-	    				id: id,
-	    				field:field,
-	    				value: value
-	    			},
-	    			error:function(){
-	    				alert("error");
-	    			}
-	    		}); 
-	            return false;
-	        },
-		    uniqueId: "planlist_id",
-		    pagination: true,     //是否显示分页（*）
-		    pageSize: 10,
-		    sidePagination: "client",   //分页方式：client客户端分页，server服务端分页（*）
-			pageNumber:1,      //初始化加载第一页，默认第一页
-			pageSize: 10,      //每页的记录行数（*）
-		    columns: [{
-		      field: 'plan_id',
-		      title: '计划编号',
-		      align: 'center'
-		    }, {
-		      field: 'commod_id',
-		      title: '商品编号',
-		      align: 'center'
-		    }, {
-		      field: 'commod_name',
-		      title: '商品名称',
-		      align: 'center'
-		    }, {
-		      field: 'amount',
-		      title: '数量',
-		      align: 'center',
-		      editable: {
-                  type: 'text',
-                  title: 'Item Amount',
-                  validate: function (value) {
-                      value = $.trim(value);
-                      if (!value) {
-                          return 'This field is required';
-                      }
-                       var data = $(cur_table).bootstrapTable('getData'),
-                          index = $(this).parents('tr').data('index');
-                      console.log(data[index]); 
-                      return '';
-                  }
-              }
-		    }, {
-		      field: 'price',
-		      title: '单价',
-		      align: 'center',
-		      editable: {
-                  type: 'text',
-                  title: 'Item Price',
-                  validate: function (value) {
-                      value = $.trim(value);
-                      if (!value) {
-                          return 'This field is required';
-                      }
-                      /* var data = $(cur_table).bootstrapTable('getData'),
-                          index = $(this).parents('tr').data('index');
-                      alert(data[index]); */ 
-                      return '';
-                  }
-		    
-              }
-		    },{
-	          field: 'operate',
-			  title: 'Item Operate',
-			  align: 'center',
-			  events: operateEvents,
-			  formatter: operateFormatter
-		    }
-		    ]
-		  });
-		};
-		    
 		 return oTableInit;
 		};
-		function operateFormatter(value, row, index) {
-	        return [
-	            '<a class="remove" href="javascript:void(0)" title="Remove">',
-	            '<i class="glyphicon glyphicon-remove"></i>',
-	            '</a>'
-	        ].join('');
-	    }
-
-	    window.operateEvents = {
-	        'click .remove': function (e, value, row, index) {
-	        	var id = row.planlist_id;
-	        	$.ajax({
-	    			url: '<%=request.getContextPath() %>/mainserver/removeCommod',	 	
-	    			type:'get', 	
-	    			dataType:'json', 													
-	    			data:{
-	    				id: id
-	    			},													
-	    			success:function(data, textStatus){
-	    				alert("delete");
-	    				$(cur_table).bootstrapTable('removeByUniqueId', id);
-	    			} 
-	    		});  
-	        }
-	    };
-
 	</script>	
 </body>
 

@@ -8,6 +8,7 @@ public class PlanVO {
 	private long staff_id;
 	private String operation_time;
 	private int status;
+	private String statusInString;
 	public long getPlan_id() {
 		return plan_id;
 	}
@@ -43,5 +44,11 @@ public class PlanVO {
 	}
 	public void setStatus(int status) {
 		this.status = status;
+	}
+	public String getStatusInString() {
+		return statusInString;
+	}
+	public void setStatusInString(String statusInString) {
+		this.statusInString = statusInString;
 	}
 }

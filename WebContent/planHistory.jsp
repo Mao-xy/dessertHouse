@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>总经理首页</title>
+<title>历史产品计划</title>
 
 <link href="<%=request.getContextPath() %>/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <link href="<%=request.getContextPath() %>/staff/css/datepicker3.css" rel="stylesheet">
@@ -49,8 +49,8 @@
 			</div>
 		</form>
 		<ul class="nav menu">
-			<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> 产品计划审批</a></li>
-			<li><a href="<%=request.getContextPath() %>/direct/manager?type=history"><span class="glyphicon glyphicon-th-list"></span> 历史产品计划</a></li>
+			<li><a href="<%=request.getContextPath() %>/direct/manager?type=check""><span class="glyphicon glyphicon-th-list"></span> 产品计划审批</a></li>
+			<li><a href="#"><span class="glyphicon glyphicon-th-list"></span> 历史产品计划</a></li>
 			<li><a href="<%=request.getContextPath() %>/direct/manager?type=stats"><span class="glyphicon glyphicon-stats"></span> 数据统计</a></li>
 		</ul>
 		<div class="attribution">Made By <a href="#">Mao Xueying</a></div>
@@ -61,7 +61,7 @@
 			<ol class="breadcrumb">
 				<li><a href="#"><span class="glyphicon glyphicon-home"></span></a></li>
 				<li>总经理</li>
-				<li class="active">待审批产品计划</li>
+				<li class="active">历史产品计划</li>
 			</ol>
 		</div><!--/.row-->
 		
@@ -73,28 +73,8 @@
 		
 		<div class="row">
 			<div class="col-lg-12">
-				<h2>通知</h2>
-				<div class="alert bg-success alert-dismissable" role="alert" id="alert">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-				      &times;
-				   </button>
-					<span class="glyphicon glyphicon-check"></span> 您有<span id="numberTBD">2</span>个产品计划待审批。</span>  
-				</div>
-			</div>
-		</div><!--/.row-->
-		
-		<div class="row">
-			<div class="col-lg-12">
 				<div class="panel panel-default">
-					<div class="panel-heading">产品计划列表</div>
-					<div id="toolbar" class="btn-group">
-			            <button id="btn_agree" type="button" class="btn btn-default">
-			                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>同意
-			            </button>
-			            <button id="btn_disagree" type="button" class="btn btn-default">
-			                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>驳回
-			            </button>
-				    </div>
+					<div class="panel-heading">历史产品计划</div>
 					<div class="panel-body">
 						<table id="plan-table">
 						</table>
@@ -107,6 +87,8 @@
 
 	<script src="<%=request.getContextPath() %>/staff/js/jquery-1.11.1.min.js"></script>
 	<script src="<%=request.getContextPath() %>/staff/js/bootstrap.min.js"></script>
+	<script src="<%=request.getContextPath() %>/staff/js/easypiechart.js"></script>
+	<script src="<%=request.getContextPath() %>/staff/js/easypiechart-data.js"></script>
 	<script src="<%=request.getContextPath() %>/staff/js/bootstrap-table.js"></script>
 	<script src="<%=request.getContextPath() %>/js/manager.js"></script>
 	<script>
@@ -123,7 +105,6 @@
 	$(window).on('resize', function () {
 	  if ($(window).width() <= 767) $('#sidebar-collapse').collapse('hide')
 	})
-	
 	$(function () {
 
 	 //1.初始化Table
@@ -139,15 +120,14 @@ var TableInit = function () {
 	 //初始化Table
 	 oTableInit.Init = function () {
 	  $('#plan-table').bootstrapTable({
-	   url: '<%=request.getContextPath() %>/manager/planByStatus',   //请求后台的URL（*）
+	   url: '<%=request.getContextPath() %>/manager/allPlan',   //请求后台的URL（*）
 	   method: 'get',      //请求方式（*）
-	   toolbar: '#toolbar',    //工具按钮用哪个容器
 	   striped: true,      //是否显示行间隔色
 	   cache: false,      //是否使用缓存，默认为true，所以一般情况下需要设置一下这个属性（*）
 	   pagination: true,     //是否显示分页（*）
 	   sortable: true,      //是否启用排序
 	   sortOrder: "desc",     //排序方式
-	   queryParams: {status: 0},//传递参数（*）,0表示未审批，详见Configure
+	   queryParams: {},//传递参数（*）,0表示未审批，详见Configure
 	   sidePagination: "client",   //分页方式：client客户端分页，server服务端分页（*）
 	   pageNumber:1,      //初始化加载第一页，默认第一页
 	   pageSize: 10,      //每页的记录行数（*）
@@ -163,8 +143,6 @@ var TableInit = function () {
 	   cardView: false,     //是否显示详细视图
 	   detailView: true,     //是否显示父子表
 	   columns: [{
-		 checkbox: true 
-	   },{
 	    field: 'plan_id',
 	    title: '计划编号',
 	    align:	'center',
@@ -200,13 +178,7 @@ var TableInit = function () {
 	    title: '计划状态',
 	    align:	'center',
 	    class: 'status'
-	   },{
-        field: 'operate',
-	    title: 'Item Operate',
-	    align: 'center',
-	    events: operateEvents,
-	    formatter: operateFormatter
-    }
+	   }
 	  ],
 	   onExpandRow: function (index, row, $detail) {
 		   oTableInit.InitSubTable(index, row, $detail);
@@ -256,53 +228,7 @@ var TableInit = function () {
 	    
 	 return oTableInit;
 	};
-	function operateFormatter(value, row, index) {
-        return [
-            '<a class="like" href="javascript:void(0)" title="Like">',
-            '<i class="glyphicon glyphicon-heart"></i>',
-            '</a>  ',
-            '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="glyphicon glyphicon-remove"></i>',
-            '</a>'
-        ].join('');
-    }
 
-    window.operateEvents = {
-        'click .like': function (e, value, row, index) {
-	       	var id = row.plan_id;
-       		var url = 'http://localhost:8080/dessertHouse/manager/check';
-       		$.ajax({
-       			url :url,	 	
-       			type:'get', 	
-       			dataType:'json', 													
-       			data:{
-       				id: id,
-       				type: 'agree'
-       			},													
-       			success:function(data, textStatus){
-       				alert("操作已成功!");
-       				$("#plan-table").bootstrapTable('refresh',{silent: true} );
-       			} 
-       		});
-        },
-        'click .remove': function (e, value, row, index) {
-        	var id = row.plan_id;
-       		var url = 'http://localhost:8080/dessertHouse/manager/check';
-       		$.ajax({
-       			url :url,	 	
-       			type:'get', 	
-       			dataType:'json', 													
-       			data:{
-       				id: id,
-       				type: 'disagree'
-       			},													
-       			success:function(data, textStatus){
-       				alert("操作已成功!");
-       				$("#plan-table").bootstrapTable('refresh',{silent: true} );
-       			} 
-       		});
-        }
-    };
 	</script>	
 </body>
 

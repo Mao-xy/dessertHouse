@@ -28,6 +28,7 @@
 	<bean id="planJsonController" class="desserthouse.controller.api.PlanJsonController" />
 	<bean id="salesJsonController" class="desserthouse.controller.api.SalesJsonController" />
 	<bean id="mainServerJsonController" class="desserthouse.controller.api.MainServerJsonController" />
+	<bean id="adminJsonController" class="desserthouse.controller.api.AdminJsonController" />
 	
 	<!-- service -->
 	<bean id="memberService" class="desserthouse.service.impl.MemberServiceImpl"/>

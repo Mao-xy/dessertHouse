@@ -30,6 +30,11 @@
 		<action name="manager" class="staffController" method="manager">
 			<result name="check">/managerHome.jsp</result>
 			<result name="stats">/stats.jsp</result>
+			<result name="history">/planHistory.jsp</result>
+		</action>
+		<action name="mainServer" class="staffController" method="mainServer">
+			<result name="home">/mainServerHome.jsp</result>
+			<result name="makePlan">/makePlan.jsp</result>
 		</action>
 		<action name="member" class="memberController" method="redirect">
 			<result name="reserve">/reserve.jsp</result>

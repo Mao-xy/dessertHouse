@@ -17,7 +17,7 @@ public class Staff {
 	private String birthday;
 	private String phone;
 	private String card;
-	private int shop_id;
+	private long shop_id;
 	private double salary;
 	private int post;
 	private String joining_time;
@@ -63,10 +63,10 @@ public class Staff {
 	public void setCard(String card) {
 		this.card = card;
 	}
-	public int getShop_id() {
+	public long getShop_id() {
 		return shop_id;
 	}
-	public void setShop_id(int shop_id) {
+	public void setShop_id(long shop_id) {
 		this.shop_id = shop_id;
 	}
 	public double getSalary() {

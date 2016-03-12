@@ -43,5 +43,30 @@ public class ShopServiceImpl implements ShopService{
 		// TODO Auto-generated method stub
 		return Transform.shop2vo(sd.getById(id));
 	}
+	@Override
+	public String getName(long id) {
+		// TODO Auto-generated method stub
+		return sd.getName(id);
+	}
+	@Override
+	public void modifyName(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyName(id, value);
+	}
+	@Override
+	public void modifyAddress(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyAddress(id, value);
+	}
+	@Override
+	public void modifyOwner(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyOwner(id, value);
+	}
+	@Override
+	public void modifyPhone(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyPhone(id, value);
+	}
 
 }

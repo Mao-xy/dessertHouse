@@ -1,5 +1,7 @@
 package desserthouse.service.impl;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import desserthouse.VO.StaffVO;
@@ -27,6 +29,21 @@ public class StaffServiceImpl implements  StaffService {
 	public StaffVO getStaffById(long id) {
 		// TODO Auto-generated method stub
 		return Transform.staff2VO(sd.getStaffById(id));
+	}
+	@Override
+	public ArrayList<StaffVO> staffOfShop(long shop_id) {
+		// TODO Auto-generated method stub
+		return Transform.staffList2vo(sd.getStaffOfShop(shop_id));
+	}
+	@Override
+	public ArrayList<StaffVO> getAll() {
+		// TODO Auto-generated method stub
+		return Transform.staffList2vo(sd.getAll());
+	}
+	@Override
+	public long add(StaffVO vo) {
+		// TODO Auto-generated method stub
+		return sd.add(Transform.vo2staff(vo));
 	}
 
 }

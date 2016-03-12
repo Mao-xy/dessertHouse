@@ -50,7 +50,7 @@ public class PlanDaoImpl extends BaseDaoImpl implements PlanDao {
 		delete(plan);
 		//删除计划对应的商品列表
 		Session session = sessionFactory.getCurrentSession();
-		session.createSQLQuery("delete from commodofplan where plan_id='"+id+"'");
+		session.createSQLQuery("delete from commodofplan where plan_id='"+id+"'").executeUpdate();
 	}
 
 	@Override
@@ -74,6 +74,48 @@ public class PlanDaoImpl extends BaseDaoImpl implements PlanDao {
 	public ArrayList<CommodOfPlan> getCommodOfPlan(long plan_id) {
 		// TODO Auto-generated method stub
 		return (ArrayList<CommodOfPlan>) getListByColumn(CommodOfPlan.class, "plan_id", plan_id);
+	}
+
+	@Override
+	public void agreePlan(ArrayList<Long> idList) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		for(long id:idList){
+			session.createSQLQuery("update plan set status='1' where plan_id='"+id+"'").executeUpdate();
+		}
+	}
+
+	@Override
+	public void disagreePlan(ArrayList<Long> idList) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		for(long id:idList){
+			session.createSQLQuery("update plan set status='-1' where plan_id='"+id+"'").executeUpdate();
+		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public void removeCommod(long id) {
+		// TODO Auto-generated method stub
+		CommodOfPlan en = new CommodOfPlan();
+		en.setPlanlist_id(id);
+		delete(en);
+	}
+
+	@Override
+	public void modifyAmount(long id, int amount) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.createSQLQuery("update commodofplan set amount='"+amount+"' where planlist_id='"+id+"'").executeUpdate();
+		
+	}
+
+	@Override
+	public void modifyPrice(long id, double price) {
+		// TODO Auto-generated method stub
+		Session session = sessionFactory.getCurrentSession();
+		session.createSQLQuery("update commodofplan set price='"+price+"' where planlist_id='"+id+"'").executeUpdate();
 	}
 	
 }

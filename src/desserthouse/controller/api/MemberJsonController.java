@@ -10,8 +10,7 @@ import desserthouse.controller.BaseController;
 import desserthouse.service.MemberService;
 
 public class MemberJsonController extends BaseController {
-
-	/**
+	/*
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;

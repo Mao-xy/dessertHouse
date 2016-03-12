@@ -57,4 +57,24 @@ public interface PlanService {
 	 * 获得某个店面在某周的所有可销售产品
 	 */
 	public ArrayList<CommodOfPlanVO> saleable(String date, long id);
+	/*
+	 * 审批通过一批计划
+	 */
+	public void agreePlan(ArrayList<Long> idList);
+	/*
+	 * 审批驳回一批计划
+	 */
+	public void disagreePlan(ArrayList<Long> idList);
+	/*
+	 * 移除计划中的某个商品
+	 */
+	public void removeCommod(long id);
+	/*
+	 * 修改计划中的某个商品的商品数量
+	 */
+	public void modifyAmount(long id, int amount);
+	/*
+	 * 修改计划中的某个商品的商品单价
+	 */
+	public void modifyPrice(long id, double price);
 }

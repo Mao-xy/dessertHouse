@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import desserthouse.VO.PlanVO;
-import desserthouse.configure.Configure;
 import desserthouse.controller.BaseController;
 import desserthouse.service.PlanService;
 
@@ -24,8 +23,7 @@ public class MainServerJsonController extends BaseController {
 	@Override
 	public String process(Map<String, String> params) {
 		// TODO Auto-generated method stub
-		planList = ps.getAllPlan();
-		return Configure.SUCCESS;
+		return null;
 	}
 	
 	public ArrayList<PlanVO> getPlanList() {

@@ -64,61 +64,6 @@
 						<input type="text" class="form-control" placeholder="银行卡账号" id="card" name="card" />
 					</div>
 				</div>
-				<div class="form-group">
-					<label for="start1" class="control-label col-md-3">居住地</label>
-					<div class="col-sm-9">
-						<input name="address" id="start1" autocomplete="off" type="text" value="请选择/输入城市名称" 
-					class="city_input inputFocus proCityQueryAll proCitySelAll form-control" ov="请选择/输入城市名称">
-					</div>
-				</div>	
-			    <!--弹出省省市-->
-				<div class="provinceCityAll">
-				  <div class="tabs clearfix">
-				    <ul class="">
-				      <li><a href="javascript:" class="current" tb="hotCityAll">热门城市</a></li>
-				      <li><a href="javascript:" tb="provinceAll">省份</a></li>
-				      <li><a href="javascript:" tb="cityAll" id="cityAll">城市</a></li>
-				      <li><a href="javascript:" tb="countyAll" id="countyAll">区县</a></li>
-				    </ul>
-				  </div>
-				  <div class="con">
-				    <div class="hotCityAll invis">
-				      <div class="pre"><a></a></div>
-				      <div class="list">
-				        <ul>
-				          <!--<li><a href="javascript:"  class="current">南京</a></li> -->
-				        </ul>
-				      </div>
-				      <div class="next"><a class="can"></a></div>
-				    </div>
-				    <div class="provinceAll invis">
-				      <div class="pre"><a></a></div>
-				      <div class="list">
-				        <ul>
-				          <!-- <li><a href="javascript:"  class="current">江西省</a></li> -->
-				        </ul>
-				      </div>
-				      <div class="next"><a class="can"></a></div>
-				    </div>
-				    <div class="cityAll invis">
-				      <div class="pre"><a></a></div>
-				      <div class="list">
-				        <ul>
-				          <!--<li><a href="javascript:"  class="current">南京</a></li> -->
-				        </ul>
-				      </div>
-				      <div class="next"><a class="can"></a></div>
-				    </div>
-				    <div class="countyAll invis">
-				      <div class="pre"><a></a></div>
-				      <div class="list">
-				        <ul>
-				        </ul>
-				      </div>
-				      <div class="next"><a class="can"></a></div>
-				    </div>
-				  </div>
-				</div>
 			    <div class="form-group input-area">
 					<label for="birthday" class="control-label col-md-3">出生日期</label>
 					<div class="input-group date form_date col-md-9" data-date="" data-date-format="yyyy-M-dd" data-link-field="birthday" data-link-format="yyyy-mm-dd">

@@ -41,7 +41,7 @@
    			</action>
    		</package>
    		<package name="mainserver" namespace="/mainserver" extends="json-default">
-   			<action name="plan" class="mainServerJsonController">
+   			<action name="plan" class="planJsonController">
    				<result type="json">
    					<param name="root">planList</param> 
    				</result>
@@ -52,6 +52,61 @@
    				</result>
    			</action>
    			<action name="deletePlan" class="planJsonController" method="deletePlan">
+   				<result type="json" />
+   			</action>
+   			<action name="removeCommod" class="planJsonController" method="removeCommod">
+   				<result type="json" />
+   			</action>
+   			<action name="modifyCommod" class="planJsonController" method="modifyCommod">
+   				<result type="json" />
+   			</action>
+   		</package>
+   		<package name="manager" namespace="/manager" extends="json-default">
+   			<action name="planByStatus" class="planJsonController" method="planByStatus">
+   				<result type="json">
+   					<param name="root">planList</param> 
+   				</result>
+   			</action>
+   			<action name="commodOfPlan" class="planJsonController" method="commodOfPlan">
+   				<result type="json">
+   					<param name="root">commodOfPlan</param> 
+   				</result>
+   			</action>
+   			<action name="check" class="planJsonController" method="checkPlan">
+   				<result type="json" />
+   			</action>
+   			<action name="allPlan" class="planJsonController">
+   				<result type="json">
+   					<param name="root">planList</param> 
+   				</result>
+   			</action>
+   		</package>
+   		<package name="administer" namespace="/admin" extends="json-default">
+   			<action name="allShop" class="adminJsonController" method="allShop">
+   				<result type="json">
+   					<param name="root">shopList</param> 
+   				</result>
+   			</action>
+   			<action name="staffOfShop" class="adminJsonController" method="staffOfShop">
+   				<result type="json">
+   					<param name="root">staffList</param> 
+   				</result>
+   			</action>
+   			<action name="allStaff" class="adminJsonController" method="allStaff">
+   				<result type="json">
+   					<param name="root">staffList</param> 
+   				</result>
+   			</action>
+   			<action name="removeShop" class="adminJsonController" method="removeShop">
+   				<result type="json" />
+   			</action>
+   			<action name="addShop" class="adminJsonController" method="addShop">
+   				<result type="json" />
+   			</action>
+   			<action name="modifyShop" class="adminJsonController" method="modifyShop">
+   				<result type="json" />
+   			</action>
+   			<action name="addStaff" class="adminJsonController" method="addStaff">
    				<result type="json" />
    			</action>
    		</package>

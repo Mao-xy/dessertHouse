@@ -6,12 +6,15 @@ public class StaffVO {
 	private String name;
 	private String password;
 	private int sex;
+	private String sexInString;
 	private String birthday;
 	private String phone;
 	private String card;
-	private int shop_id;
+	private long shop_id;
+	private String shop_name;
 	private double salary;
 	private int post;
+	private String postInString;
 	private String joining_time;
 	public long getId() {
 		return id;
@@ -55,10 +58,10 @@ public class StaffVO {
 	public void setCard(String card) {
 		this.card = card;
 	}
-	public int getShop_id() {
+	public long getShop_id() {
 		return shop_id;
 	}
-	public void setShop_id(int shop_id) {
+	public void setShop_id(long shop_id) {
 		this.shop_id = shop_id;
 	}
 	public double getSalary() {
@@ -84,5 +87,23 @@ public class StaffVO {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getSexInString() {
+		return sexInString;
+	}
+	public void setSexInString(String sexInString) {
+		this.sexInString = sexInString;
+	}
+	public String getShop_name() {
+		return shop_name;
+	}
+	public void setShop_name(String shop_name) {
+		this.shop_name = shop_name;
+	}
+	public String getPostInString() {
+		return postInString;
+	}
+	public void setPostInString(String postInString) {
+		this.postInString = postInString;
 	}
 }

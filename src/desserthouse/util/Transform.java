@@ -40,6 +40,43 @@ public class Transform {
 		return vo;
 	}
 	
+	public static Staff vo2staff(StaffVO vo){
+		Staff s = new Staff();
+		s.setId(vo.getId());
+		s.setStaff_id(vo.getStaff_id());
+		s.setName(vo.getName());
+		s.setPassword(vo.getPassword());
+		s.setSex(vo.getSex());
+		s.setBirthday(vo.getBirthday());
+		s.setPhone(vo.getPhone());
+		s.setCard(vo.getCard());
+		s.setShop_id(vo.getShop_id());
+		s.setSalary(vo.getSalary());
+		s.setPost(vo.getPost());
+		s.setJoining_time(vo.getJoining_time());
+		return s;
+	}
+	
+	public static ArrayList<StaffVO> staffList2vo(ArrayList<Staff> list){
+		ArrayList<StaffVO> res = new ArrayList<StaffVO>();
+		for(Staff s:list){
+			StaffVO vo = new StaffVO();
+			vo.setId(s.getId());
+			vo.setStaff_id(s.getStaff_id());
+			vo.setName(s.getName());
+			vo.setPassword(s.getPassword());
+			vo.setSex(s.getSex());
+			vo.setBirthday(s.getBirthday());
+			vo.setPhone(s.getPhone());
+			vo.setCard(s.getCard());
+			vo.setShop_id(s.getShop_id());
+			vo.setSalary(s.getSalary());
+			vo.setPost(s.getPost());
+			vo.setJoining_time(s.getJoining_time());
+			res.add(vo);
+		}
+		return res;
+	}
 	public static Member VO2member(MemberVO vo){
 		Member mb = new Member();
 		mb.setMember_id(vo.getMember_id());

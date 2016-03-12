@@ -49,5 +49,8 @@ public class Configure {
 	public static final int PLAN_APPLY = 0;
 	public static final int PLAN_AGREE = 1;
 	public static final int PLAN_DISAGREE = -1;
+	//审批结果
+	public static final String AGREE = "agree";
+	public static final String DISAGREE = "disagree";
 	
 }

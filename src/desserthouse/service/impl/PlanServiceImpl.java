@@ -88,5 +88,35 @@ public class PlanServiceImpl implements PlanService {
 		return Transform.commodOfPlan2vo(pd.saleable(Tools.getMonday(date),
 				Tools.getSunday(date), id));
 	}
+
+	@Override
+	public void agreePlan(ArrayList<Long> idList) {
+		// TODO Auto-generated method stub
+		pd.agreePlan(idList);
+	}
+
+	@Override
+	public void disagreePlan(ArrayList<Long> idList) {
+		// TODO Auto-generated method stub
+		pd.disagreePlan(idList);
+	}
+
+	@Override
+	public void removeCommod(long id) {
+		// TODO Auto-generated method stub
+		pd.removeCommod(id);
+	}
+
+	@Override
+	public void modifyAmount(long id, int amount) {
+		// TODO Auto-generated method stub
+		pd.modifyAmount(id, amount);
+	}
+
+	@Override
+	public void modifyPrice(long id, double price) {
+		// TODO Auto-generated method stub
+		pd.modifyPrice(id, price);
+	}
 	
 }

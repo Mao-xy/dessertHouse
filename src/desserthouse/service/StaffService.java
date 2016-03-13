@@ -23,5 +23,18 @@ public interface StaffService {
 	 * 
 	 */
 	public long add(StaffVO vo);
+	
+	public void update(StaffVO vo);
+	
+	public void delete(long id);
+	
+	public void modifyName(long id, String value);
+	
+	public void modifyPhone(long id, String value);
+	
+	public void modifyCard(long id, String value);
+	
+	public void modifySalary(long id, double value);
+	
 
 }

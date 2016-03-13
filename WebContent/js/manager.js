@@ -18,7 +18,7 @@ $("#btn_agree").click(function(){
 				type: 'agree'
 			},													
 			success:function(data, textStatus){
-				alert("操作已成功!");
+				alert("已批准!");
 				$("#plan-table").bootstrapTable('refresh',{silent: true} );
 			} 
 		});
@@ -44,7 +44,7 @@ $("#btn_disagree").click(function(){
 				type: 'disagree'
 			},													
 			success:function(data, textStatus){
-				alert("操作已成功!");
+				alert("已驳回!");
 				$("#plan-table").bootstrapTable('refresh',{silent: true} );
 			} 
 		});

@@ -280,7 +280,7 @@ var TableInit = function () {
        				type: 'agree'
        			},													
        			success:function(data, textStatus){
-       				alert("操作已成功!");
+       				alert("已批准!");
        				$("#plan-table").bootstrapTable('refresh',{silent: true} );
        			} 
        		});
@@ -297,7 +297,7 @@ var TableInit = function () {
        				type: 'disagree'
        			},													
        			success:function(data, textStatus){
-       				alert("操作已成功!");
+       				alert("已驳回!");
        				$("#plan-table").bootstrapTable('refresh',{silent: true} );
        			} 
        		});

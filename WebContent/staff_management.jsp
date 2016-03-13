@@ -82,7 +82,7 @@
    data-target="#addModal">
 				                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>增加
 				            </button>
-				            <button id="btn_delete" type="button" class="btn btn-default">
+				            <button id="btn-delete" type="button" class="btn btn-default">
 				                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
 				            </button>
 					    </div>
@@ -94,7 +94,7 @@
 		</div><!--/.row-->	
 		<!-- 模态框（Modal） -->
 		<div class="modal fade" id="addModal" tabindex="-1" role="dialog" 
-		   aria-labelledby="myModalLabel" aria-hidden="true">
+		   aria-labelledby="addModalLabel" aria-hidden="true">
 		   <div class="modal-dialog">
 		      <div class="modal-content">
 		         <div class="modal-header">
@@ -102,7 +102,7 @@
 		               data-dismiss="modal" aria-hidden="true">
 		                  &times;
 		            </button>
-		            <h4 class="modal-title" id="myModalLabel">
+		            <h4 class="modal-title" id="addModalLabel">
 		              添加员工
 		            </h4>
 		         </div>
@@ -119,8 +119,10 @@
 					   <div class="form-group">
 					      <label for="sex" class="col-sm-2 control-label">性别</label>
 					      <div class="col-sm-10 input-group">
-					         <input type="text" class="form-control" id="sex" 
-					            placeholder="Sex" required="required">
+					         <select class="form-control" id="sex">
+					         	<option value="1">男</option>
+					         	<option value="0">女</option>
+					         </select>
 					      </div>
 					   </div>
 					   <div class="form-group">
@@ -134,12 +136,11 @@
 									<span class="glyphicon glyphicon-calendar"></span>
 								</span>
 							</div>
-							<input type="hidden" id="birthday" name="birthday" value='' required="required"/>
+							<input type="hidden" id="birthday" name="birthday" required="required"/>
 					   </div>
 					   <div class="form-group">
 					      <label for="phone" class="col-sm-2 control-label">联系方式</label>
 					      <div class="col-sm-10 input-group">
-					      	 <span class="input-group-addon">025-</span>
 					         <input type="text" class="form-control" id="phone" 
 					            placeholder="Contact" required="required">
 					      </div>
@@ -154,8 +155,8 @@
 					   <div class="form-group">
 					      <label for="shop" class="col-sm-2 control-label">所属店面</label>
 					      <div class="col-sm-10 input-group">
-					         <input type="text" class="form-control" id="shop" 
-					            placeholder="Work In" required="required">
+					         <select class="form-control" id="shop_id">
+					         </select>
 					      </div>
 					   </div>
 					   <div class="form-group">
@@ -168,8 +169,12 @@
 					   <div class="form-group">
 					      <label for="post" class="col-sm-2 control-label">职位</label>
 					      <div class="col-sm-10 input-group">
-					         <input type="text" class="form-control" id="post" 
-					            placeholder="Post" required="post">
+					         <select class="form-control" id="post" >
+						          <option value="0">系统管理员</option>
+						          <option value="3">经理</option>
+						          <option value="2">总管</option>
+						          <option value="1">普通店员</option>
+					          </select>
 					      </div>
 					   </div>
 					   <div class="form-group">
@@ -198,7 +203,108 @@
 		         </div>
 		      </div><!-- /.modal-content -->
 		</div><!-- /.modal -->
-		
+	</div>
+		<!-- 修改的模态框 -->
+		<!-- 模态框（Modal） -->
+		<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" 
+		   aria-labelledby="modifyModalLabel" aria-hidden="true">
+		   <div class="modal-dialog">
+		      <div class="modal-content">
+		         <div class="modal-header">
+		            <button type="button" class="close" 
+		               data-dismiss="modal" aria-hidden="true">
+		                  &times;
+		            </button>
+		            <h4 class="modal-title" id="modifyModalLabel">
+		              修改员工信息
+		            </h4>
+		         </div>
+		         <div class="modal-body">
+		            <!-- form -->
+		            <form class="form-horizontal" role="form">
+		            	<input type="hidden" id="id-m" value="" />
+					   <div class="form-group">
+					      <label for="staff_id" class="col-sm-2 control-label">员工编号</label>
+					      <div class="col-sm-10 input-group">
+					         <p class="form-control-static" id="staff_id-m" ></p>
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="name-m" class="col-sm-2 control-label">姓名</label>
+					      <div class="col-sm-10 input-group">
+					         <input type="text" class="form-control" id="name-m" 
+					            placeholder="Name" required="required">
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="sex-m" class="col-sm-2 control-label">性别</label>
+					      <div class="col-sm-10 input-group">
+					         <p class="form-control-static" id="sexInString-m" ></p>
+					         <input type="hidden" id="sex-m" />
+					      </div>
+					   </div>
+					   <div class="form-group">
+							<label for="birthday-m" class="control-label col-sm-2">出生日期</label>
+							<p class="form-control-static" id="birthday-m" ></p>
+					   </div>
+					   <div class="form-group">
+					      <label for="phone-m" class="col-sm-2 control-label">联系方式</label>
+					      <div class="col-sm-10 input-group">
+					      	 <span class="input-group-addon">025-</span>
+					         <input type="text" class="form-control" id="phone-m" 
+					            placeholder="Contact" required="required">
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="card-m" class="col-sm-2 control-label">银行帐号</label>
+					      <div class="col-sm-10 input-group">
+					         <input type="text" class="form-control" id="card-m" 
+					            placeholder="Account" required="required">
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="shop-m" class="col-sm-2 control-label">所属店面</label>
+					      <div class="col-sm-10 input-group">
+					          <select class="form-control" id="shop_id-m" >
+					          </select>
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="salary-m" class="col-sm-2 control-label">月薪</label>
+					      <div class="col-sm-10 input-group">
+					         <input type="text" class="form-control" id="salary-m" 
+					            placeholder="Salary" required="required">
+					      </div>
+					   </div>
+					   <div class="form-group">
+					      <label for="postInString-m" class="col-sm-2 control-label">职位</label>
+					      <div class="col-sm-10 input-group">
+					          <select class="form-control" id="post-m" >
+						          <option value="0">系统管理员</option>
+						          <option value="3">经理</option>
+						          <option value="2">总管</option>
+						          <option value="1">普通店员</option>
+					          </select>
+					      </div>
+					   </div>
+					   <div class="form-group">
+							<label for="joining_time-m" class="control-label col-sm-2">入职时间</label>
+							<p class="form-control-static" id="joining_time-m" ></p>
+					   </div>
+					</form>
+		            <!-- form ends -->
+		         </div>
+		         <div class="modal-footer">
+		            <button type="button" class="btn btn-default" 
+		               data-dismiss="modal">关闭
+		            </button>
+		            <button type="button" class="btn btn-primary" id="btn-update">
+		               更新
+		            </button>
+		         </div>
+		      </div><!-- /.modal-content -->
+		   </div>
+		</div><!-- /.modal -->
 	</div><!--/.main-->
 
 	<script src="<%=request.getContextPath() %>/staff/js/jquery-1.11.1.min.js"></script>
@@ -231,23 +337,22 @@
 			
 			$("#btn-add").click(function(){
 				var name=$("#name").val();
-				var sex= $("#sex").val();
+				var sex= $("#sex option:selected").val();
 				var birthday= $("#birthday").val();
 				var phone= $("#phone").val();
 				var card= $("#card").val();
-				var shop_id=$("#shop_id").val();
+				var shop_id=$("#shop_id option:selected").val();
 				var salary=$("#salary").val();
-				var post=$("#post").val();
+				var post=$("#post option:selected").val();
 				var joining_time=$("#joining_time").val();
-				
-				if((name=='')||(sex=='')||(birthday='')||(phone='')||(card='')||(shop_id=='')
+				if((name=='')||(sex=='')||(birthday=='')||(phone=='')||(card=='')||(shop_id=='')
 						||(salary=='')||(post=='')||(joining_time=='')){
 					alert("请填写完整信息");
 					return false;
 				}
 				$.ajax({
     				url :'<%=request.getContextPath() %>/admin/addStaff',	 	
-    				type:'get', 	
+    				type:'post', 	
     				dataType:'json', 													
     				data:{
     					name:name,
@@ -270,27 +375,53 @@
 	    	 $("#btn-delete").click(function(){
 	    		var id = getIdSelections();
 	    		if(id==""){
-	    			alert("请选择要删除的店面。");
+	    			alert("请选择要删除的员工。");
 	    		}
 	    		else{
 	    			var str = '';
 	    			for(var i=0;i<id.length;i++){
 	    				str = str + id[i].toString()+'+';
 	    			}
-	    			<%-- $.ajax({
-	    				url :'<%=request.getContextPath() %>/admin/removeShop',	 	
+	    			 $.ajax({
+	    				url :'<%=request.getContextPath() %>/admin/removeStaff',	 	
 	    				type:'get', 	
 	    				dataType:'json', 													
 	    				data:{
 	    					id: str
 	    				},													
 	    				success:function(data, textStatus){
-	    					alert("操作已成功!");
-	    					$("#shop-table").bootstrapTable('refresh',{silent: true} );
+	    					alert("已成功删除!");
+	    					$("#staff-table").bootstrapTable('refresh',{silent: true} );
 	    				} 
-	    			}); --%>
+	    			});
 	    		}
 	    	});
+	    	 $("#btn-update").click(function(){
+    			 $.ajax({
+    				url :'<%=request.getContextPath() %>/admin/modifyStaff',	 	
+    				type:'get', 	
+    				dataType:'json', 													
+    				data:{
+    					id: $("#id-m").val(),
+    					type: 'modal',
+    					staff_id: $("#staff_id-m").html(),
+    					name: $("#name-m").val(),
+    					sex: $("#sex-m").val(),
+    					birthday: $("#birthday-m").html(),
+    					phone: $("#phone-m").val(),
+    					shop_id: $("#shop_id-m option:selected").val(),
+		        		card: $("#card-m").val(),
+		        		salary: $("#salary-m").val(),
+		        		post: $("#post-m option:selected").val(),
+		        		joining_time: $("#joining_time-m").html(),
+    				},													
+    				success:function(data, textStatus){
+    					$("#modifyModal").modal('hide');
+    					alert("更新已成功!");
+    					$("#staff-table").bootstrapTable('refresh',{silent: true} );
+    				} 
+    			});
+		    });
 	    	 
 	    	 $("input").blur(function(){
 	    		  if($(this).val()==''){
@@ -311,6 +442,40 @@
 			        minView: 2,
 			        forceParse: 0
 		     });
+	    	 
+	    	 $('#addModal').on('shown.bs.modal', function () {
+	    		//获得所有店面id，并填入模态框
+	    		 $.ajax({
+	    				url :'<%=request.getContextPath() %>/admin/allShop',	 	
+	    				type:'get', 	
+	    				dataType:'json', 													
+	    				data:{},													
+	    				success:function(data, textStatus){
+	    					var str = '<option value="0">无</option>';
+	    					$.each(data,function(i,entity) {
+	    						str = str + "<option value='"+entity.shop_id+"'>"+entity.name+"</option>"
+	    					});
+	    					$("#shop_id").html(str);
+	    				} 
+	    		  });
+	    	 })
+	    	 
+	    	 $('#modifyModal').on('show.bs.modal', function () {
+	    		 //获得所有店面id，并填入模态框
+	    		 $.ajax({
+	    				url :'<%=request.getContextPath() %>/admin/allShop',	 	
+	    				type:'get', 	
+	    				dataType:'json', 													
+	    				data:{},													
+	    				success:function(data, textStatus){
+	    					var str = '<option value="0">无</option>';
+	    					$.each(data,function(i,entity) {
+	    						str = str + "<option value='"+entity.shop_id+"'>"+entity.name+"</option>"
+	    					});
+	    					$("#shop_id-m").html(str);
+	    				} 
+	    		  });
+	    	 })
 	    	 
 		});
  
@@ -344,20 +509,16 @@
 			   detailView: false,     //是否显示父子表
 			   editable: true,
 			   onEditableSave: function (field, row, oldValue, $el) {
-					var id = row.shop_id;
+					var id = row.id;
 					var value = '';
 					if($.trim(field)=='name'){
 						value = row.name;
 					}else if($.trim(field)=='phone'){
-						value = row.owner;
+						value = row.phone;
 					}else if($.trim(field)=='card'){
-						value = row.phone;
-					}else if($.trim(field)=='shop_name'){
-						value = row.phone;
+						value = row.card;
 					}else if($.trim(field)=='salary'){
-						value = row.phone;
-					}else if($.trim(field)=='postInString'){
-						value = row.phone;
+						value = row.salary;
 					}
 					$.ajax({
 						url: '<%=request.getContextPath() %>/admin/modifyStaff',	 	
@@ -366,7 +527,8 @@
 						data:{
 							id: id,
 							field:field,
-							value: value
+							value: value,
+							type: 'inline'
 						},
 						error:function(){
 							alert("error");
@@ -411,7 +573,7 @@
 	                          return 'This field is required';
 	                      }
 	                  }
-	             },
+	              },
 			    },{
 			      field: 'birthday',
 			      title: '出生日期',
@@ -434,16 +596,6 @@
 			      field: 'shop_name',
 			      title: '所属店面',
 			      align: 'center',
-			      editable: {
-	                  type: 'text',
-	                  title: 'Work In',
-	                  validate: function (value) {
-	                      value = $.trim(value);
-	                      if (!value) {
-	                          return 'This field is required';
-	                      }
-	                  }
-	             },
 			    },{
 			      field: 'salary',
 			      title: '月薪',
@@ -461,17 +613,7 @@
 			    },{
 			      field: 'postInString',
 			      title: '职位',
-			      align: 'center',
-			      editable: {
-	                  type: 'text',
-	                  title: 'Post',
-	                  validate: function (value) {
-	                      value = $.trim(value);
-	                      if (!value) {
-	                          return 'This field is required';
-	                      }
-	                  }
-	             },
+			      align: 'center'
 		         },{
 			      field: 'joining_time',
 			      title: '入职时间',
@@ -492,6 +634,9 @@
 			
 			function operateFormatter(value, row, index) {
 		        return [
+					'<a class="modify" href="javascript:void(0)" title="Modify">',
+					'<i class="glyphicon glyphicon-pencil"></i>',
+					'</a>',
 		            '<a class="remove" href="javascript:void(0)" title="Remove">',
 		            '<i class="glyphicon glyphicon-remove"></i>',
 		            '</a>'
@@ -499,25 +644,40 @@
 		    }
 		
 		    window.operateEvents = {
-		        'click .remove': function (e, value, row, index) {
-		        	$.ajax({
-	    				url: '<%=request.getContextPath() %>/admin/modifyStaff',	 	
-	    				type:'get', 	
-	    				dataType:'json', 													
-	    				data:{
-	    					id: row.shop_id
-	    				},													
-	    				success:function(data, textStatus){
-	    					alert("操作已成功!");
-	    					$("#shop-table").bootstrapTable('refresh',{silent: true} );
-	    				} 
-	    			});
-		        }
+		    		'click .modify': function (e, value, row, index) {
+			        	$("#modifyModal").modal('show');
+			        	$("#id-m").val(row.id);
+			        	$("#staff_id-m").html(row.staff_id);
+			        	$("#name-m").val(row.name);
+			        	$("#sexInString-m").html(row.sexInString);
+			        	$("#sex-m").val(row.sex);
+			        	$("#birthday-m").html(row.birthday);
+			        	$("#phone-m").val(row.phone);
+			        	$("#card-m").val(row.card);
+			        	$("#shop_id-m").val(row.shop_id);
+			        	$("#salary-m").val(row.salary);
+			        	$("#post-m").val(row.post);
+			        	$("#joining_time-m").html(row.joining_time);
+			        },	
+			        'click .remove': function (e, value, row, index) {
+			        	$.ajax({
+		    				url: '<%=request.getContextPath() %>/admin/removeStaff',	 	
+		    				type:'get', 	
+		    				dataType:'json', 													
+		    				data:{
+		    					id: row.id
+		    				},													
+		    				success:function(data, textStatus){
+		    					alert("已成功删除!");
+		    					$("#staff-table").bootstrapTable('refresh',{silent: true} );
+		    				} 
+		    			});
+			        }
 		    };
 		    
 		    function getIdSelections() {
 	    	    return $.map($("#staff-table").bootstrapTable('getSelections'), function (row) {
-	    	    	return row.staff_id;
+	    	    	return row.id;
 	    	 	});
 	    	}
 	</script>	

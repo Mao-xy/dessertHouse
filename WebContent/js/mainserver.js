@@ -17,7 +17,7 @@ $("#btn_delete").click(function(){
 				id: str
 			},													
 			success:function(data, textStatus){
-				alert("delete success!");
+				alert("已成功删除!");
 				$("#plan-table").bootstrapTable('refresh',{silent: true} );
 			} 
 		});

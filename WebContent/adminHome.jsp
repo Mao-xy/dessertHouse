@@ -203,7 +203,7 @@
 				var opening_time= $("#opening_time").val();
 				var phone= $("#phone").val();
 				var owner= $("#owner").val();
-				if((name=='')||(address=='')||(opening_time='')||(phone='')||(owner='')){
+				if((name=='')||(address=='')||(opening_time=='')||(phone=='')||(owner=='')){
 					alert("请填写完整信息");
 					return false;
 				}
@@ -220,7 +220,7 @@
     				},													
     				success:function(data, textStatus){
     					$('#addModal').modal('hide');
-    					alert("操作已成功!");
+    					alert("已成功添加!");
     					$("#shop-table").bootstrapTable('refresh',{silent: true} );
     				} 
     			});
@@ -243,7 +243,7 @@
 	    					id: str
 	    				},													
 	    				success:function(data, textStatus){
-	    					alert("操作已成功!");
+	    					alert("删除已成功!");
 	    					$("#shop-table").bootstrapTable('refresh',{silent: true} );
 	    				} 
 	    			});
@@ -487,7 +487,7 @@
 	    					id: row.shop_id
 	    				},													
 	    				success:function(data, textStatus){
-	    					alert("操作已成功!");
+	    					alert("删除已成功!");
 	    					$("#shop-table").bootstrapTable('refresh',{silent: true} );
 	    				} 
 	    			});

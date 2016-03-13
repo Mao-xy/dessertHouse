@@ -106,7 +106,14 @@
    			<action name="modifyShop" class="adminJsonController" method="modifyShop">
    				<result type="json" />
    			</action>
+   			
    			<action name="addStaff" class="adminJsonController" method="addStaff">
+   				<result type="json" />
+   			</action>
+   			<action name="modifyStaff" class="adminJsonController" method="modifyStaff">
+   				<result type="json" />
+   			</action>
+   			<action name="removeStaff" class="adminJsonController" method="removeStaff">
    				<result type="json" />
    			</action>
    		</package>

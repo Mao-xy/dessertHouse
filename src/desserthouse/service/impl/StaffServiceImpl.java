@@ -45,5 +45,35 @@ public class StaffServiceImpl implements  StaffService {
 		// TODO Auto-generated method stub
 		return sd.add(Transform.vo2staff(vo));
 	}
+	@Override
+	public void update(StaffVO vo) {
+		// TODO Auto-generated method stub
+		sd.update(Transform.vo2staff(vo));
+	}
+	@Override
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		sd.delete(id);
+	}
+	@Override
+	public void modifyName(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyName(id, value);
+	}
+	@Override
+	public void modifyPhone(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyPhone(id, value);
+	}
+	@Override
+	public void modifyCard(long id, String value) {
+		// TODO Auto-generated method stub
+		sd.modifyCard(id, value);
+	}
+	@Override
+	public void modifySalary(long id, double value) {
+		// TODO Auto-generated method stub
+		sd.modifySalary(id, value);
+	}
 
 }

@@ -150,7 +150,7 @@ public class AdminJsonController extends BaseController {
 		Map<String,String> params = getParams();
 		System.out.println(params.toString());
 		String name = params.get("name").trim();
-		String sex = params.get("sex").trim();
+		int sex = Integer.parseInt(params.get("sex").trim());
 		String birthday = params.get("birthday").trim();
 		String phone = params.get("phone").trim();
 		String card = params.get("card").trim();
@@ -161,11 +161,7 @@ public class AdminJsonController extends BaseController {
 		StaffVO vo = new StaffVO();
 		vo.setName(name);
 		vo.setPassword("123456");
-		if(sex.equals("男")){
-			vo.setSex(Configure.MALE);
-		}else{
-			vo.setSex(Configure.FEMALE);
-		}
+		vo.setSex(sex);
 		vo.setBirthday(birthday);
 		vo.setPhone(phone);
 		vo.setCard(card);
@@ -174,6 +170,66 @@ public class AdminJsonController extends BaseController {
 		vo.setPost(post);
 		vo.setJoining_time(joining_time);
 		staffService.add(vo);
+		return Configure.SUCCESS;
+	}
+	
+	public String modifyStaff(){
+		System.out.println("AdminJsonController:modifyStaff");
+		Map<String,String> params = getParams();
+		System.out.println(params.toString());
+		String type = params.get("type");
+		long id = Long.parseLong(params.get("id"));
+		if(type.equals(Configure.INLINE)){
+			String field = params.get("field").trim();
+			String value = params.get("value").trim();
+			if(field.equals("name")){
+				staffService.modifyName(id, value);
+			}else if(field.equals("phone")){
+				staffService.modifyPhone(id, value);
+			}else if(field.equals("card")){
+				staffService.modifyCard(id, value);
+			}else if(field.equals("salary")){
+				staffService.modifySalary(id, Double.parseDouble(value));
+			}
+		}else{
+			String staff_id = params.get("staff_id").trim();
+			String name = params.get("name").trim();
+			int sex = Integer.parseInt(params.get("sex").trim());
+			String birthday = params.get("birthday").trim();
+			String phone = params.get("phone").trim();
+			String card = params.get("card").trim();
+			double salary = Double.parseDouble(params.get("salary").trim());
+			long shop_id = Long.parseLong(params.get("shop_id").trim());
+			int post = Integer.parseInt(params.get("post").trim());
+			String joining_time =  params.get("joining_time").trim();
+			StaffVO vo = new StaffVO();
+			vo.setId(id);
+			vo.setStaff_id(staff_id);
+			vo.setName(name);
+			vo.setCard(card);
+			vo.setBirthday(birthday);
+			vo.setJoining_time(joining_time);
+			vo.setPhone(phone);
+			vo.setPassword("123456");
+			vo.setPost(post);
+			vo.setSalary(salary);
+			vo.setSex(sex);
+			vo.setShop_id(shop_id);
+			staffService.update(vo);
+		}
+		return Configure.SUCCESS;
+	}
+	
+	public String  removeStaff(){
+		System.out.println("AdminJsonController:removeStaff");
+		String staffid = getParams().get("id").trim();
+		String[] temp = staffid.split("\\+");
+		for(String id:temp){
+			if(!id.equals("")){
+				System.out.println(id);
+				staffService.delete(Long.parseLong(id));
+			}
+		}
 		return Configure.SUCCESS;
 	}
 	public ArrayList<ShopVO> getShopList() {

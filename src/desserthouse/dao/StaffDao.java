@@ -22,4 +22,16 @@ public interface StaffDao {
 	 * 添加一个员工 
 	 */
 	public long add(Staff staff);
+	
+	public void update(Staff staff);
+	
+	public void delete(long id);
+	
+	public void modifyName(long id, String value);
+	
+	public void modifyPhone(long id, String value);
+	
+	public void modifyCard(long id, String value);
+	
+	public void modifySalary(long id, double value);
 }

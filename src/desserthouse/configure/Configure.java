@@ -53,4 +53,7 @@ public class Configure {
 	public static final String AGREE = "agree";
 	public static final String DISAGREE = "disagree";
 	
+	//员工信息修改方式
+	public static final String INLINE = "inline";
+	public static final String MODAL = "modal";
 }
